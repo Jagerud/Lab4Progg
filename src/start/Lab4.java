@@ -15,7 +15,7 @@ public class Lab4 {
         iClass.showBoxInfo();
     }
     public static void poop(){
-        System.out.println("this is test");
+        System.out.println("this is new master!!!!!");
     }
 }
 /*
