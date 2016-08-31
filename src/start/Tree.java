@@ -1,8 +1,5 @@
 package start;
 
-/**
- * Created by Jaeger on 2016-08-06.
- */
 /*
 public class Tree {
     public Node root;

@@ -2,18 +2,13 @@ package start;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class InputClass {
 
     private HashMap<String, Integer> boxMap = new HashMap<>();
     private HashMap<String, ArrayList<String>> maps = new HashMap<>();
     private ArrayList<String> boxOnTopList = new ArrayList<>();
-    private int line;
-    private String line2 = "";
     private BufferedReader in;
     public InputClass() {
 
@@ -31,52 +26,40 @@ public class InputClass {
             }
             try {
                 BufferedReader in = new BufferedReader(new FileReader(fileObj));
-                //try {
+
+                int line = Integer.parseInt(in.readLine());
+                String line2;
+
+                for (int i = 0; i < line; i++) {
+                    line2 = in.readLine();
+                    String lineString = line2.substring(0, 1);
+                    int lineNumber = Integer.parseInt(line2.substring(line2.length() - 1)); //bara (2)?
+                    boxMap.put(lineString, lineNumber);
+                }
+                try {
                     line = Integer.parseInt(in.readLine());
-                    //line2 = "";// = in.readLine(); //Avoiding first line
-                //} catch (IOException e) {
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                //    e.printStackTrace();
-                //}
+                String lineString, lineString2;
+                ArrayList<String> tempList;
 
-                    for (int i = 0; i < line; i++) {
-                        line2 = in.readLine();
-                        //System.out.println(line2);
-                        String lineString = line2.substring(0, 1);
-                        int lineNumber = Integer.parseInt(line2.substring(line2.length() - 1)); //bara (2)?
-                        boxMap.put(lineString, lineNumber);
+                for (int i = 0; i < line; i++) {
+                    line2 = in.readLine();
+                    lineString = line2.substring(line2.length() - 1);
+                    lineString2 = line2.substring(0, 1);
+
+                     if (maps.containsKey(lineString)) {
+                        maps.get(lineString).add(lineString2);
                     }
-                    try {
-                        line = Integer.parseInt(in.readLine());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+                    else {
+                        tempList = new ArrayList<>();
+                        tempList.add(lineString2);
+                        maps.put(lineString,tempList);
                     }
-                    String lineStringSaved;// = "bull";// =
-                    String lineString="";
-                    String lineString2;
-                    ArrayList<String> tempList = new ArrayList<>();
-                    //try {
-                        //System.out.println("line: " + line);
-                        for (int i = 0; i < line; i++) {
-                            lineStringSaved = lineString;
-                            line2 = in.readLine();
-                            lineString = line2.substring(0, 1); //top
-                            if (lineString.compareTo(lineStringSaved) != 0 && lineStringSaved.compareTo("") != 0) { //hoppar över sista, löst, lägger nedanför for
-                                maps.put(lineStringSaved, tempList);
-                            }
-                            if (lineString.compareTo(lineStringSaved) == 0) { //samma bokstav ska då lägga flera i list
-                                lineString2 = line2.substring(line2.length() - 1);
-                                tempList.add(lineString2);
-                            } else {
-                                lineString2 = line2.substring(line2.length() - 1);
-                                tempList = new ArrayList<>();
-                                tempList.add(lineString2);
-                            }
-                        }
-                    /*} catch (IOException e) {
-                        e.printStackTrace();
-                    } */
-                maps.put(lineString,tempList);
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -103,7 +86,32 @@ public class InputClass {
     }
 
     public ArrayList<String> getBoxOnTopList() {
-        return boxOnTopList;
+
+        /*ArrayList<String> temp = new ArrayList<>();
+        Iterator it = boxMap.keySet().iterator();
+        Iterator it2 = maps.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            while (it2.hasNext()) {
+                Map.Entry pair2 = (Map.Entry)it2.next();
+                if (pair == pair2) {
+                    String test = pair2.getKey();
+                    temp.add(pair2.getKey());
+                }
+            }
+        }*/
+        ArrayList<String> onTop = new ArrayList<>();
+        ArrayList<String> one = new ArrayList<>();
+        Set<String> first = boxMap.keySet();
+        Set<String> second = maps.keySet();
+        one = first.toArray(new String[]);
+        //Iterator it = one.iterator();
+        for (int i = 0; i < one.; i++) {
+            if (second.contains(one.)) {
+                temp.add(first);
+            }
+        }
+        return onTop;
     }
 
     public HashMap<String, Integer> getBoxMap() {

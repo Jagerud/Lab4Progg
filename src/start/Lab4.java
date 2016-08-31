@@ -10,6 +10,7 @@ public class Lab4 {
         InputClass iClass = new InputClass();
         iClass.storeInput();
         iClass.showBoxInfo();
+        iClass.getBoxOnTopList();
     }
 
     public static void poop(){

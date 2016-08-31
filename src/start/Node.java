@@ -1,8 +1,5 @@
 package start;
 
-/**
- * Created by Jaeger on 2016-08-06.
- */
 /*
 public class Node {
     private boolean data;
@@ -41,4 +38,3 @@ public class Node {
 }
 
 */
-
