@@ -63,11 +63,9 @@ public class InputClass {
                             lineStringSaved = lineString;
                             line2 = in.readLine();
                             lineString = line2.substring(line2.length() - 1); //top
-
+                            lineString2 = line2.substring(0, 1);
                             if(maps.containsKey(lineString)){
-                                lineString2 = line2.substring(0, 1);
                                 maps.get(lineString).add(lineString2);
-                                System.out.println("snopp");
                             }
 
                             /*if (lineString.compareTo(lineStringSaved) != 0 && lineStringSaved.compareTo("") != 0) { //hoppar över sista, löst, lägger nedanför for
@@ -77,7 +75,6 @@ public class InputClass {
                                 lineString2 = line2.substring(0, 1);
                                 tempList.add(lineString2);
                             }*/ else {
-                                lineString2 = line2.substring(0, 1);
                                 tempList = new ArrayList<>();
                                 tempList.add(lineString2);
                                 maps.put(lineString,tempList);
@@ -92,6 +89,7 @@ public class InputClass {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            sort();
             Object stringArray[] = {"First", "Second", "Third"};
             JOptionPane.showOptionDialog(null, "Make your choice, you must.", "Select a program",
                     JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, stringArray,
@@ -109,6 +107,12 @@ public class InputClass {
         while (it2.hasNext()) {
             Map.Entry pair = (Map.Entry)it2.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
+        }
+
+    }
+    public void sort(){
+        while(maps.keySet().iterator().hasNext()){
+            System.out.println(maps.keySet().iterator().next());
         }
     }
 
