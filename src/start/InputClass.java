@@ -62,23 +62,32 @@ public class InputClass {
                         for (int i = 0; i < line; i++) {
                             lineStringSaved = lineString;
                             line2 = in.readLine();
-                            lineString = line2.substring(0, 1); //top
-                            if (lineString.compareTo(lineStringSaved) != 0 && lineStringSaved.compareTo("") != 0) { //hoppar över sista, löst, lägger nedanför for
+                            lineString = line2.substring(line2.length() - 1); //top
+
+                            if(maps.containsKey(lineString)){
+                                lineString2 = line2.substring(0, 1);
+                                maps.get(lineString).add(lineString2);
+                                System.out.println("snopp");
+                            }
+
+                            /*if (lineString.compareTo(lineStringSaved) != 0 && lineStringSaved.compareTo("") != 0) { //hoppar över sista, löst, lägger nedanför for
                                 maps.put(lineStringSaved, tempList);
                             }
-                            if (lineString.compareTo(lineStringSaved) == 0) { //samma bokstav ska då lägga flera i list
-                                lineString2 = line2.substring(line2.length() - 1);
+                            /*if (lineString.compareTo(lineStringSaved) == 0) { //samma bokstav ska då lägga flera i list
+                                lineString2 = line2.substring(0, 1);
                                 tempList.add(lineString2);
-                            } else {
-                                lineString2 = line2.substring(line2.length() - 1);
+                            }*/ else {
+                                lineString2 = line2.substring(0, 1);
                                 tempList = new ArrayList<>();
                                 tempList.add(lineString2);
+                                maps.put(lineString,tempList);
                             }
                         }
                     /*} catch (IOException e) {
                         e.printStackTrace();
                     } */
-                maps.put(lineString,tempList);
+                //maps.put(lineString,tempList);
+                System.out.println(maps.get("i").size());
 
             } catch (IOException e) {
                 e.printStackTrace();

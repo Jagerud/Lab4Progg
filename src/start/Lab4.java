@@ -9,7 +9,7 @@ public class Lab4 {
         /*Test test = new Test();
         test.test();
         */
-        poop();
+        //poop();
         InputClass iClass = new InputClass();
         iClass.storeInput();
         iClass.showBoxInfo();
