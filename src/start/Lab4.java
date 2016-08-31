@@ -15,7 +15,7 @@ public class Lab4 {
         iClass.showBoxInfo();
     }
     public static void poop(){
-        System.out.println("this is filles poop hehe");
+        System.out.println("This is Satans poop!");
     }
 }
 /*
