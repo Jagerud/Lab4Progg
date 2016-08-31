@@ -1,10 +1,7 @@
 package start;
 
-
-/**
- * Created by Sand on 2016-04-04.
- */
 public class Lab4 {
+
     public static void main(String args[]) {
         /*Test test = new Test();
         test.test();
@@ -14,10 +11,12 @@ public class Lab4 {
         iClass.storeInput();
         iClass.showBoxInfo();
     }
+
     public static void poop(){
         System.out.println("This is Satans poop!");
     }
 }
+
 /*
     -------Anteckningar-------
     Kolla om bokstaven som skall flyttas finns i högra ledet i andra delen av textfilen, om den gör det kontrollera

@@ -7,10 +7,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Created by Jaeger on 2016-07-29.
- */
 public class InputClass {
+
     private HashMap<String, Integer> boxMap = new HashMap<>();
     private HashMap<String, ArrayList<String>> maps = new HashMap<>();
     private ArrayList<String> boxOnTopList = new ArrayList<>();
@@ -91,6 +89,7 @@ public class InputClass {
     }
 
     public void showBoxInfo() { //oklart om det behövs 2 iteratorer, fundera nån gång
+
         Iterator it = boxMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
