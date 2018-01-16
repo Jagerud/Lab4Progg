@@ -9,25 +9,17 @@ public class Box {
 
     private char name;
     private int weight;
-    private ArrayList<Box> higherBox = new ArrayList<Box>();
-    private boolean free = true;
+    private ArrayList<Box> higherBox;
 
 
-    public Box(char name, int weight){
+    public Box(char name, int weight, ArrayList<Box> higherBox){
         this.name = name;
         this.weight = weight;
-    }
-
-    public void addBox(Box currentBox) {
-        higherBox.add(currentBox);
-        free = false;
+        this.higherBox = higherBox;
     }
 
     public void removeBox(Box currentBox) {
         higherBox.remove(currentBox);
-        if (higherBox.isEmpty()) {
-            free = true;
-        }
     }
 
     public char getName() {
@@ -39,7 +31,7 @@ public class Box {
     }
 
     public boolean isFree() {
-        return free;
+        return higherBox.isEmpty();
     }
 
     public ArrayList<Box> getHigherBox() {
