@@ -71,7 +71,7 @@ public class InputClass {
                     //    e.printStackTrace();
                     //}
                     String lineStringSaved;// = "bull";// =
-                    String lineString="";
+                    String lineString = "";
                     String lineString2;
                     ArrayList<String> tempList = new ArrayList<>();
                     //try {
