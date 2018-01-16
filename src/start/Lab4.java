@@ -13,7 +13,7 @@ public class Lab4 {
         iClass.storeInput();
         iClass.showBoxInfo();
         System.out.println(iClass.getNrOfBoxes());
-        Sorting sorting = new Sorting();
+        Sorting sorting = new Sorting(iClass);
         sorting.sort();
     }
 }

@@ -7,10 +7,10 @@ import java.util.HashMap;
  * Created by Jaeger on 2016-08-02.
  */
 public class Sorting {
-    private InputClass inputClass = new InputClass();
+    private InputClass inputClass;
 
-    public Sorting(){
-
+    public Sorting(InputClass inputClass){
+        this.inputClass = inputClass;
     }
 
     public void sort(){
