@@ -62,27 +62,34 @@ public class InputClass {
                         for (int i = 0; i < line; i++) {
                             lineStringSaved = lineString;
                             line2 = in.readLine();
-                            lineString = line2.substring(0, 1); //top
-                            if (lineString.compareTo(lineStringSaved) != 0 && lineStringSaved.compareTo("") != 0) { //hoppar över sista, löst, lägger nedanför for
+                            lineString = line2.substring(line2.length() - 1); //top
+                            lineString2 = line2.substring(0, 1);
+                            if(maps.containsKey(lineString)){
+                                maps.get(lineString).add(lineString2);
+                            }
+
+                            /*if (lineString.compareTo(lineStringSaved) != 0 && lineStringSaved.compareTo("") != 0) { //hoppar över sista, löst, lägger nedanför for
                                 maps.put(lineStringSaved, tempList);
                             }
-                            if (lineString.compareTo(lineStringSaved) == 0) { //samma bokstav ska då lägga flera i list
-                                lineString2 = line2.substring(line2.length() - 1);
+                            /*if (lineString.compareTo(lineStringSaved) == 0) { //samma bokstav ska då lägga flera i list
+                                lineString2 = line2.substring(0, 1);
                                 tempList.add(lineString2);
-                            } else {
-                                lineString2 = line2.substring(line2.length() - 1);
+                            }*/ else {
                                 tempList = new ArrayList<>();
                                 tempList.add(lineString2);
+                                maps.put(lineString,tempList);
                             }
                         }
                     /*} catch (IOException e) {
                         e.printStackTrace();
                     } */
-                maps.put(lineString,tempList);
+                //maps.put(lineString,tempList);
+                System.out.println(maps.get("i").size());
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            sort();
             Object stringArray[] = {"First", "Second", "Third"};
             JOptionPane.showOptionDialog(null, "Make your choice, you must.", "Select a program",
                     JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, stringArray,
@@ -100,6 +107,12 @@ public class InputClass {
         while (it2.hasNext()) {
             Map.Entry pair = (Map.Entry)it2.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
+        }
+
+    }
+    public void sort(){
+        while(maps.keySet().iterator().hasNext()){
+            System.out.println(maps.keySet().iterator().next());
         }
     }
 

@@ -9,13 +9,16 @@ public class Lab4 {
         /*Test test = new Test();
         test.test();
         */
+
         poop();
         InputClass iClass = new InputClass();
         iClass.storeInput();
         iClass.showBoxInfo();
     }
     public static void poop(){
+
         System.out.println("this is new master!!!!!");
+
     }
 }
 /*
