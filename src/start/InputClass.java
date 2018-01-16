@@ -15,7 +15,7 @@ public class InputClass {
     private HashMap<String, ArrayList<String>> maps = new HashMap<>();
     private ArrayList<String> boxOnTopList = new ArrayList<>();
     private int line;
-    private String line2 = "";
+    private String line2;
     private BufferedReader in;
     public InputClass() {
 
@@ -40,19 +40,34 @@ public class InputClass {
 
                 //    e.printStackTrace();
                 //}
-
+                //System.out.println(line);
                     for (int i = 0; i < line; i++) {
                         line2 = in.readLine();
+                        if(line2.isEmpty()){
+                            line2 = in.readLine();
+                        }
                         //System.out.println(line2);
-                        String lineString = line2.substring(0, 1);
-                        int lineNumber = Integer.parseInt(line2.substring(line2.length() - 1)); //bara (2)?
-                        boxMap.put(lineString, lineNumber);
+                        if(line2.length() <3){
+                            line = Integer.parseInt(line2);
+                        }
+                        else {
+                            String lineString = line2.substring(0, 1);
+                            int lineNumber = Integer.parseInt(line2.substring(line2.length() - 1)); //bara (2)?
+
+                            boxMap.put(lineString, lineNumber);
+                        }
                     }
-                    try {
-                        line = Integer.parseInt(in.readLine());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
+                    //try {
+                //System.out.println("line: " + line);
+                if(line2.length() >2){
+                    line2 = in.readLine();
+                }
+                line = Integer.parseInt(in.readLine());
+                        //System.out.println("line: " + line);
+                    //} catch (IOException e) {
+                    //    e.printStackTrace();
+                    //}
                     String lineStringSaved;// = "bull";// =
                     String lineString="";
                     String lineString2;
@@ -60,10 +75,16 @@ public class InputClass {
                     //try {
                         //System.out.println("line: " + line);
                         for (int i = 0; i < line; i++) {
-                            lineStringSaved = lineString;
+                            //lineStringSaved = lineString;
                             line2 = in.readLine();
+                            if(line2.isEmpty()){
+                                line2 = in.readLine();
+                            }
+                            //System.out.println(line2);
                             lineString = line2.substring(line2.length() - 1); //top
                             lineString2 = line2.substring(0, 1);
+                            //System.out.println(lineString);
+                            //System.out.println(lineString2);
                             if(maps.containsKey(lineString)){
                                 maps.get(lineString).add(lineString2);
                             }
@@ -78,18 +99,19 @@ public class InputClass {
                                 tempList = new ArrayList<>();
                                 tempList.add(lineString2);
                                 maps.put(lineString,tempList);
+                                //System.out.println(maps.get(lineString));
                             }
                         }
                     /*} catch (IOException e) {
                         e.printStackTrace();
                     } */
                 //maps.put(lineString,tempList);
-                System.out.println(maps.get("i").size());
+                //System.out.println(maps.size());
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            sort();
+            //sort();
             Object stringArray[] = {"First", "Second", "Third"};
             JOptionPane.showOptionDialog(null, "Make your choice, you must.", "Select a program",
                     JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, stringArray,
@@ -110,7 +132,7 @@ public class InputClass {
         }
 
     }
-    public void sort(){
+    public void sort(){ //TODO wat is dis, weird name and stupid loop
         while(maps.keySet().iterator().hasNext()){
             System.out.println(maps.keySet().iterator().next());
         }
