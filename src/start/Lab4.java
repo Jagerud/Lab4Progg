@@ -6,15 +6,8 @@ package start;
  */
 public class Lab4 {
     public static void main(String args[]) {
-        /*Test test = new Test();
-        test.test();
-        */
-        InputClass iClass = new InputClass();
-        iClass.storeInput();
-        iClass.showBoxInfo();
-        System.out.println(iClass.getNrOfBoxes());
-        Sorting sorting = new Sorting(iClass);
-        sorting.sort();
+        Controller controller = new Controller();
+        controller.start();
     }
 }
 /*
