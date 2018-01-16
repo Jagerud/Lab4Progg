@@ -13,7 +13,7 @@ import java.util.Map;
 public class InputClass {
     private HashMap<String, Integer> boxMap = new HashMap<>();
     private HashMap<String, ArrayList<String>> maps = new HashMap<>();
-    private ArrayList<String> boxOnTopList = new ArrayList<>();
+    private ArrayList<String> boxNameList = new ArrayList<>();
     private int line,nrOfBoxes;
     private String line2;
     private BufferedReader in;
@@ -53,7 +53,7 @@ public class InputClass {
                         }
                         else {
                             String lineString = line2.substring(0, 1);
-                            boxOnTopList.add(lineString);
+                            boxNameList.add(lineString);
                             int lineNumber = Integer.parseInt(line2.substring(line2.length() - 1)); //bara (2)?
 
                             boxMap.put(lineString, lineNumber);
@@ -141,13 +141,13 @@ public class InputClass {
         }
     }
     */
-    public ArrayList<String> getBoxOnTopList() {
-        return boxOnTopList;
+    public ArrayList<String> getBoxNameList() {
+        return boxNameList;
     }
-    public HashMap<String, Integer> getBoxMap() {
+    public HashMap<String, Integer> getBoxNameWeightMap() {
         return boxMap;
     }
-    public HashMap<String, ArrayList<String>> getMaps() {
+    public HashMap<String, ArrayList<String>> getBoxOnTopMap() {
         return maps;
     }
     public int getNrOfBoxes() {

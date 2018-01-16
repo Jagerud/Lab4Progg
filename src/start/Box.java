@@ -7,29 +7,32 @@ import java.util.ArrayList;
  */
 public class Box {
 
-    private char name;
+    private String name;
     private int weight;
-    private ArrayList<Box> higherBox;
+    //private boolean free = true;
+    private ArrayList<Box> higherBox = new ArrayList<>();
 
-
-    public Box(char name, int weight, ArrayList<Box> higherBox){
+    //Du hade rätt med konstruktorn!
+    public Box(String name, int weight ){
         this.name = name;
         this.weight = weight;
-        this.higherBox = higherBox;
     }
 
     public void removeBox(Box currentBox) {
         higherBox.remove(currentBox);
     }
 
-    public char getName() {
+    public String getName() {
         return name;
     }
 
     public int getWeight() {
         return weight;
     }
-
+    public void addBox(Box currentBox) {
+        higherBox.add(currentBox);
+        //free = false;
+        }
     public boolean isFree() {
         return higherBox.isEmpty();
     }

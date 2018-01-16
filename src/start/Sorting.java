@@ -15,9 +15,9 @@ public class Sorting {
 
     public void sort(){
 /*
-        HashMap boxMap = boxArrayList.getBoxMap();
-        HashMap <String, ArrayList<String>> maps = boxArrayList.getMaps();
-        ArrayList <String> boxNam = boxArrayList.getBoxOnTopList();
+        HashMap boxMap = boxArrayList.getBoxNameWeightMap();
+        HashMap <String, ArrayList<String>> maps = boxArrayList.getBoxOnTopMap();
+        ArrayList <String> boxNam = boxArrayList.getBoxNameList();
         System.out.println(boxArrayList.getNrOfBoxes());*/
 
         //GET BOXArray
