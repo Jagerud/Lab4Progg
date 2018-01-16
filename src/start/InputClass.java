@@ -14,7 +14,7 @@ public class InputClass {
     private HashMap<String, Integer> boxMap = new HashMap<>();
     private HashMap<String, ArrayList<String>> maps = new HashMap<>();
     private ArrayList<String> boxOnTopList = new ArrayList<>();
-    private int line;
+    private int line,nrOfBoxes;
     private String line2;
     private BufferedReader in;
     public InputClass() {
@@ -35,6 +35,7 @@ public class InputClass {
                 BufferedReader in = new BufferedReader(new FileReader(fileObj));
                 //try {
                     line = Integer.parseInt(in.readLine());
+                    nrOfBoxes = line;
                     //line2 = "";// = in.readLine(); //Avoiding first line
                 //} catch (IOException e) {
 
@@ -52,6 +53,7 @@ public class InputClass {
                         }
                         else {
                             String lineString = line2.substring(0, 1);
+                            boxOnTopList.add(lineString);
                             int lineNumber = Integer.parseInt(line2.substring(line2.length() - 1)); //bara (2)?
 
                             boxMap.put(lineString, lineNumber);
@@ -132,17 +134,23 @@ public class InputClass {
         }
 
     }
+    /*
     public void sort(){ //TODO wat is dis, weird name and stupid loop
         while(maps.keySet().iterator().hasNext()){
             System.out.println(maps.keySet().iterator().next());
         }
     }
-
+    */
     public ArrayList<String> getBoxOnTopList() {
         return boxOnTopList;
     }
-
     public HashMap<String, Integer> getBoxMap() {
         return boxMap;
+    }
+    public HashMap<String, ArrayList<String>> getMaps() {
+        return maps;
+    }
+    public int getNrOfBoxes() {
+        return nrOfBoxes;
     }
 }

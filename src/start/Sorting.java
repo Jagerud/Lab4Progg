@@ -1,23 +1,32 @@
 package start;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by Jaeger on 2016-08-02.
  */
 public class Sorting {
-    InputClass inputClass = new InputClass();
+    private InputClass inputClass = new InputClass();
+
     public Sorting(){
 
     }
 
     public void sort(){
-        //move if nothing above
-        for(int i=0;i<inputClass.getBoxOnTopList().size();i++) { //Need to substring! both bottom and top in same spot atm
-            if(inputClass.getBoxOnTopList().get(i).compareTo("a")==0){ //check if 0 is true
-                //move the stuff
-            }else{
 
+        HashMap boxMap = inputClass.getBoxMap();
+        HashMap maps = inputClass.getMaps();
+        ArrayList boxNam = inputClass.getBoxOnTopList();
+        System.out.println(inputClass.getNrOfBoxes());
+        //move if nothing above
+        for(int i=0;i<inputClass.getNrOfBoxes();i++) {
+            if(!maps.containsKey(boxNam.get(i)) /*|| (maps.get(boxNam.get(i).))*/){ //check if box does not exist in order
+                //move the stuff
+                System.out.println("inside if");
+            }else{
+                System.out.println("outside if");
             }
         }
-
     }
 }

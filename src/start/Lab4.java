@@ -12,6 +12,9 @@ public class Lab4 {
         InputClass iClass = new InputClass();
         iClass.storeInput();
         iClass.showBoxInfo();
+        System.out.println(iClass.getNrOfBoxes());
+        Sorting sorting = new Sorting();
+        sorting.sort();
     }
 }
 /*
