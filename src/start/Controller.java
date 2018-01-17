@@ -55,10 +55,11 @@ public class Controller {
         int chosen = JOptionPane.showOptionDialog(null, "Make your choice, you must.", "Select a program",
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, stringArray,
                 stringArray[0]);
+        int manpower = 5; //TODO update how many workers
         switch (chosen){
             case 0: sorting.sort1();
             break;
-            case 1: sorting.sort2();
+            case 1: sorting.sort2(manpower);
             break;
             case 2: sorting.sort3();
             break;

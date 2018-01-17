@@ -23,7 +23,7 @@ public class Sorting {
                     for (Box aBoxArrayList : boxArrayList) {
                         for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
                             if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
-                                aBoxArrayList.removeBox(k);   //remove deleted box from arralists in boxes
+                                aBoxArrayList.removeBox(k);   //remove deleted box from arraylists in boxes
                             }
                         }
                     }
@@ -31,24 +31,34 @@ public class Sorting {
             }
         }
     }
-    public void sort2() {
-        System.out.println("Numero 2");
-        /*while (boxArrayList.size() > 0) {
+    public void sort2(int manpower) {
+        int time = 0;
+        while (boxArrayList.size() > 0) {
+            int roundWeight = 0;    //TODO not sure where to place
             for (int i = 0; i < boxArrayList.size(); i++) {
-                if (boxArrayList.get(i).isFree()) {
+                if (boxArrayList.get(i).isFree() && manpower >= roundWeight) {
                     //Remove box, it has nothing on it
                     String nameRemoved = boxArrayList.get(i).getName();
-                    boxArrayList.remove(i);
-                    for (Box aBoxArrayList : boxArrayList) {
-                        for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
-                            if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
-                                aBoxArrayList.removeBox(k);   //remove deleted box from arralists in boxes
+                    roundWeight = roundWeight + boxArrayList.get(i).getWeight();
+                    if(manpower >= roundWeight) {
+                        boxArrayList.remove(i);
+                        for (Box aBoxArrayList : boxArrayList) {
+                            for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
+                                if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
+                                    aBoxArrayList.removeBox(k);   //remove deleted box from arraylists in boxes
+                                }
+                                time++;
                             }
+                            time++;
                         }
                     }
+                    time++;
+                    System.out.println("weight: " + roundWeight);
                 }
             }
-        } */
+        }
+        time++;
+        System.out.println("Time:" + time);
     }
     public void sort3(){
         System.out.println("To be continued...");
