@@ -1,4 +1,5 @@
 package start;
+
 import java.util.ArrayList;
 
 /**
@@ -6,33 +7,35 @@ import java.util.ArrayList;
  * Edited by Alvestig.
  */
 public class Box {
-
     private String name;
     private int weight;
-    //private boolean free = true;
     private ArrayList<Box> higherBox = new ArrayList<>();
 
-    //Du hade rätt med konstruktorn!
-    public Box(String name, int weight ){
+    public Box(String name, int weight) {
         this.name = name;
         this.weight = weight;
     }
+
     public void removeBox(int currentBox) {
         higherBox.remove(currentBox);
     }
+
     public String getName() {
         return name;
     }
+
     public int getWeight() {
         return weight;
     }
+
     public void addBox(Box currentBox) {
         higherBox.add(currentBox);
-        //free = false;
-        }
+    }
+
     public boolean isFree() {
         return higherBox.isEmpty();
     }
+
     public ArrayList<Box> getHigherBox() {
         return higherBox;
     }
