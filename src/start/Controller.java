@@ -15,13 +15,14 @@ public class Controller {
         createBox();    //Store input in box objets
         testBox();
         sorting.sort(); //Sort and remove boxes
+        sorting.testBoxAfterSort();
     }
     private void createBox () {
         HashMap<String, Integer> boxNameWeight = iClass.getBoxNameWeightMap();
         HashMap <String, ArrayList<String>> boxOnTopMap = iClass.getBoxOnTopMap();
         ArrayList <String> boxNameList = iClass.getBoxNameList();
 
-        for(int i = 0; i< iClass.getNrOfBoxes(); i++) {
+        for(int i = 0; i< iClass.getNrOfBoxes(); i++) { //fill array with boxes,
             boxArrayList.add(new Box(boxNameList.get(i), boxNameWeight.get(boxNameList.get(i)))); //Allows 1 char names
         }
         for(int i = 0; i< iClass.getNrOfBoxes(); i++) {

@@ -17,15 +17,12 @@ public class Box {
         this.name = name;
         this.weight = weight;
     }
-
-    public void removeBox(Box currentBox) {
+    public void removeBox(int currentBox) {
         higherBox.remove(currentBox);
     }
-
     public String getName() {
         return name;
     }
-
     public int getWeight() {
         return weight;
     }
@@ -36,9 +33,7 @@ public class Box {
     public boolean isFree() {
         return higherBox.isEmpty();
     }
-
     public ArrayList<Box> getHigherBox() {
         return higherBox;
     }
-
 }
