@@ -80,10 +80,7 @@ public class InputClass {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Object stringArray[] = {"First", "Second", "Third"};
-            JOptionPane.showOptionDialog(null, "Make your choice, you must.", "Select a program",
-                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, stringArray,
-                    stringArray[0]);
+
         }
     }
 

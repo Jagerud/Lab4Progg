@@ -13,7 +13,7 @@ public class Sorting {
         this.boxArrayList = boxArrayList;
     }
 
-    public void sort() {
+    public void sort1() {
         while (boxArrayList.size() > 0) {
             for (int i = 0; i < boxArrayList.size(); i++) {
                 if (boxArrayList.get(i).isFree()) {
@@ -30,6 +30,28 @@ public class Sorting {
                 }
             }
         }
+    }
+    public void sort2() {
+        System.out.println("Numero 2");
+        /*while (boxArrayList.size() > 0) {
+            for (int i = 0; i < boxArrayList.size(); i++) {
+                if (boxArrayList.get(i).isFree()) {
+                    //Remove box, it has nothing on it
+                    String nameRemoved = boxArrayList.get(i).getName();
+                    boxArrayList.remove(i);
+                    for (Box aBoxArrayList : boxArrayList) {
+                        for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
+                            if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
+                                aBoxArrayList.removeBox(k);   //remove deleted box from arralists in boxes
+                            }
+                        }
+                    }
+                }
+            }
+        } */
+    }
+    public void sort3(){
+        System.out.println("To be continued...");
     }
 
     public void testBoxAfterSort() {
