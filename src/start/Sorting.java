@@ -48,6 +48,7 @@ public class Sorting {
 
     public void sort2(int manpower) {
         int time = 0;
+        System.out.println("Manpower: " + manpower);
         while (boxArrayList.size() > 0) {
             int roundWeight = 0;    //TODO not sure where to place
             for (int i = 0; i < boxArrayList.size(); i++) {
