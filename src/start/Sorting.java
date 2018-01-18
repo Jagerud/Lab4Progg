@@ -20,14 +20,13 @@ public class Sorting {
             for (int i = 0; i < boxArrayList.size(); i++) {
                 //order.add(Integer.toString(i));
                 if (boxArrayList.get(i).isFree()) {
-                    //Remove box, it has nothing on it
+                    //Flag box, it has nothing on it
                     boxArrayList.get(i).flag();
-
                 }
             }
             removeFlagged();
         }
-        System.out.println("The boxes can be removed in this order: " + order);
+        print();
     }
 
     public void sort2(int manpower) {
@@ -40,18 +39,16 @@ public class Sorting {
                     //Flag box, it has nothing on it
                     if(roundWeight + boxArrayList.get(i).getWeight() <= manpower) {
                         boxArrayList.get(i).flag();
-                        System.out.println(roundWeight);
                         roundWeight = roundWeight + boxArrayList.get(i).getWeight();
                     }
                 }
             }
-            order.add("[");
             removeFlagged();
-            order.add("]");
         }
-        System.out.println("The boxes can be removed in this order: " + order);
+        print();
     }
     private void removeFlagged(){
+        order.add("["); //to easier see which boxes are taken at the same time
         for (int i = 0; i < boxArrayList.size(); i++) {
             if (boxArrayList.get(i).isFlagged()) {
                 String nameRemoved = boxArrayList.get(i).getName();
@@ -67,6 +64,10 @@ public class Sorting {
                 }
             }
         }
+        order.add("]");
+    }
+    private void print(){
+        System.out.println("The boxes can be removed in this order: " + order);
     }
 
     /*public void sort2(int manpower) {

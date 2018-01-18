@@ -6,8 +6,12 @@ package start;
  */
 public class Lab4 {
     public static void main(String args[]) {
-        Controller controller = new Controller();
-        controller.start();
+        while (true) {
+            Controller controller = new Controller();
+            if(!controller.start()){
+                break;
+            }
+        }
     }
 }
 /*

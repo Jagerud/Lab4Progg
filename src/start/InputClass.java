@@ -24,7 +24,7 @@ public class InputClass {
 
     }
 
-    public void storeInput() {
+    public boolean storeInput() {
         File fileObj;
         JFileChooser fileBrowser = new JFileChooser();
         int result = fileBrowser.showOpenDialog(fileBrowser);
@@ -80,7 +80,10 @@ public class InputClass {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            return true;
+        }
+        else{
+            return false;
         }
     }
 

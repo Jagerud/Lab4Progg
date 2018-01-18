@@ -9,15 +9,21 @@ public class Controller {
     private ArrayList<Box> boxArrayList = new ArrayList<>();
     private Sorting sorting = new Sorting(boxArrayList);
 
-    public void start() {
-        iClass.storeInput(); //Get input from file
-        iClass.showBoxInfo();
-        System.out.println(iClass.getNrOfBoxes());
+    public boolean start() {
+        if(!iClass.storeInput()){
+            return false;
+        }
+        //Get input from file
+        //iClass.showBoxInfo();
+        //System.out.println(iClass.getNrOfBoxes());
         createBox();    //Store input in box objets
-        testBox();
-        //chooser();  //Choose program then sort and remove boxes
-        sorting.sort2(5);
-        sorting.testBoxAfterSort();
+        //testBox();
+        if (!chooser()) {  //Choose program then sort and remove boxes
+            return false;
+        }
+        //sorting.sort2(5);
+        //sorting.testBoxAfterSort();
+        return true;
     }
 
     private void createBox() {
@@ -51,21 +57,29 @@ public class Controller {
         }
     }
 
-    private void chooser(){
+    private boolean chooser() {
         Object stringArray[] = {"First", "Second", "Third"};
-        int chosen = JOptionPane.showOptionDialog(null, "Make your choice, you must.", "Select a program",
-                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, stringArray,
-                stringArray[0]);
 
-        //int manpower = 5;
-        switch (chosen){
-            case 0: sorting.sort1();
-            break;
-            case 1: sorting.sort2(Integer.parseInt(JOptionPane.showInputDialog(
-                    null,"Insert number of workers:","Workers", JOptionPane.QUESTION_MESSAGE)));
-            break;
-            case 2: sorting.sort3();
-            break;
+        switch (JOptionPane.showOptionDialog(null, "Make your choice, you must.", "Select a program",
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, stringArray,
+                stringArray[0])) {
+            case -1:
+                return false;
+            case 0:
+                sorting.sort1();
+                break;
+            case 1:
+                String workers = JOptionPane.showInputDialog(
+                        null, "Insert number of workers:", "Workers", JOptionPane.QUESTION_MESSAGE);
+                if (workers == null) {
+                    return false;
+                }
+                sorting.sort2(Integer.parseInt(workers));
+                break;
+            case 2:
+                sorting.sort3();
+                break;
         }
+        return true;
     }
 }
