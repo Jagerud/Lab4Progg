@@ -15,13 +15,24 @@ public class Sorting {
 
     public void sort1() {
         ArrayList<String> order = new ArrayList<>(boxArrayList.size());
+        System.out.println(boxArrayList.get(1).getName());
+        if(boxArrayList.get(1).isFree()){
+        System.out.println("free");}
         while (boxArrayList.size() > 0) {
             for (int i = 0; i < boxArrayList.size(); i++) {
+                //order.add(Integer.toString(i));
                 if (boxArrayList.get(i).isFree()) {
                     //Remove box, it has nothing on it
+                    boxArrayList.get(i).flag();
+
+                }
+            }
+            for (int i = 0; i < boxArrayList.size(); i++) {
+                if (boxArrayList.get(i).isFlagged()) {
                     String nameRemoved = boxArrayList.get(i).getName();
                     order.add(nameRemoved);
                     boxArrayList.remove(i);
+                    i=-1;
                     for (Box aBoxArrayList : boxArrayList) {
                         for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
                             if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {

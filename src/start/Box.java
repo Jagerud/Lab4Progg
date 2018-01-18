@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Box {
     private String name;
     private int weight;
+    private boolean flagged;
     private ArrayList<Box> higherBox = new ArrayList<>();
 
     public Box(String name, int weight) {
@@ -34,6 +35,14 @@ public class Box {
 
     public boolean isFree() {
         return higherBox.isEmpty();
+    }
+
+    public void flag(){
+        flagged = true;
+    }
+
+    public boolean isFlagged(){
+        return flagged;
     }
 
     public ArrayList<Box> getHigherBox() {
