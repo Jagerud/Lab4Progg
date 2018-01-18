@@ -14,11 +14,13 @@ public class Sorting {
     }
 
     public void sort1() {
+        ArrayList<String> order = new ArrayList<>(boxArrayList.size());
         while (boxArrayList.size() > 0) {
             for (int i = 0; i < boxArrayList.size(); i++) {
                 if (boxArrayList.get(i).isFree()) {
                     //Remove box, it has nothing on it
                     String nameRemoved = boxArrayList.get(i).getName();
+                    order.add(nameRemoved);
                     boxArrayList.remove(i);
                     for (Box aBoxArrayList : boxArrayList) {
                         for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
@@ -30,7 +32,9 @@ public class Sorting {
                 }
             }
         }
+        System.out.println("The boxes can be removed in this order: " + order);
     }
+
     public void sort2(int manpower) {
         int time = 0;
         while (boxArrayList.size() > 0) {
