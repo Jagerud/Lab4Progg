@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Sorting {
     private ArrayList<Box> boxArrayList;
+    ArrayList<String> order;
     private final String removed = "xxxxx";
 
     public Sorting(ArrayList<Box> boxArrayList) {
@@ -14,10 +15,7 @@ public class Sorting {
     }
 
     public void sort1() {
-        ArrayList<String> order = new ArrayList<>(boxArrayList.size());
-        System.out.println(boxArrayList.get(1).getName());
-        if(boxArrayList.get(1).isFree()){
-        System.out.println("free");}
+        order = new ArrayList<>(boxArrayList.size());
         while (boxArrayList.size() > 0) {
             for (int i = 0; i < boxArrayList.size(); i++) {
                 //order.add(Integer.toString(i));
@@ -27,64 +25,48 @@ public class Sorting {
 
                 }
             }
-            for (int i = 0; i < boxArrayList.size(); i++) {
-                if (boxArrayList.get(i).isFlagged()) {
-                    String nameRemoved = boxArrayList.get(i).getName();
-                    order.add(nameRemoved);
-                    boxArrayList.remove(i);
-                    i=-1;
-                    for (Box aBoxArrayList : boxArrayList) {
-                        for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
-                            if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
-                                aBoxArrayList.removeBox(k);   //remove deleted box from arraylists in boxes
-                            }
-                        }
-                    }
-                }
-            }
+            removeFlagged();
         }
         System.out.println("The boxes can be removed in this order: " + order);
     }
 
     public void sort2(int manpower) {
-        ArrayList<String> order = new ArrayList<>(boxArrayList.size());
+        order = new ArrayList<>(boxArrayList.size());
         int time = 0;
-        System.out.println(boxArrayList.get(1).getName());
-        if(boxArrayList.get(1).isFree()){
-            System.out.println("free");}
         while (boxArrayList.size() > 0) {
             int roundWeight = 0;    //TODO not sure where to place
             for (int i = 0; i < boxArrayList.size(); i++) {
-                //order.add(Integer.toString(i));
-                order.add("!");
                 if (boxArrayList.get(i).isFree() && manpower >= roundWeight) {
-                    //Remove box, it has nothing on it
-                    boxArrayList.get(i).flag();
-
+                    //Flag box, it has nothing on it
+                    if(roundWeight + boxArrayList.get(i).getWeight() <= manpower) {
+                        boxArrayList.get(i).flag();
+                        System.out.println(roundWeight);
+                        roundWeight = roundWeight + boxArrayList.get(i).getWeight();
+                    }
                 }
             }
-            for (int i = 0; i < boxArrayList.size(); i++) {
-                if (boxArrayList.get(i).isFlagged() && manpower >= roundWeight) {
-                    String nameRemoved = boxArrayList.get(i).getName();
-                    order.add(nameRemoved);
-                    roundWeight = roundWeight + boxArrayList.get(i).getWeight();
-                    boxArrayList.remove(i);
-
-
-                        i=-1;
-
-                        for (Box aBoxArrayList : boxArrayList) {
-                            for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
-                                if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
-                                    aBoxArrayList.removeBox(k);   //remove deleted box from arraylists in boxes
-                                }
-                            }
+            order.add("[");
+            removeFlagged();
+            order.add("]");
+        }
+        System.out.println("The boxes can be removed in this order: " + order);
+    }
+    private void removeFlagged(){
+        for (int i = 0; i < boxArrayList.size(); i++) {
+            if (boxArrayList.get(i).isFlagged()) {
+                String nameRemoved = boxArrayList.get(i).getName();
+                order.add(nameRemoved);
+                boxArrayList.remove(i);
+                i=-1;
+                for (Box aBoxArrayList : boxArrayList) {
+                    for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
+                        if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
+                            aBoxArrayList.removeBox(k);   //remove deleted box from arraylists in boxes
                         }
-
+                    }
                 }
             }
         }
-        System.out.println("The boxes can be removed in this order: " + order);
     }
 
     /*public void sort2(int manpower) {
