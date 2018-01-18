@@ -47,6 +47,48 @@ public class Sorting {
     }
 
     public void sort2(int manpower) {
+        ArrayList<String> order = new ArrayList<>(boxArrayList.size());
+        int time = 0;
+        System.out.println(boxArrayList.get(1).getName());
+        if(boxArrayList.get(1).isFree()){
+            System.out.println("free");}
+        while (boxArrayList.size() > 0) {
+            int roundWeight = 0;    //TODO not sure where to place
+            for (int i = 0; i < boxArrayList.size(); i++) {
+                //order.add(Integer.toString(i));
+                order.add("!");
+                if (boxArrayList.get(i).isFree() && manpower >= roundWeight) {
+                    //Remove box, it has nothing on it
+                    boxArrayList.get(i).flag();
+
+                }
+            }
+            for (int i = 0; i < boxArrayList.size(); i++) {
+                if (boxArrayList.get(i).isFlagged() && manpower >= roundWeight) {
+                    String nameRemoved = boxArrayList.get(i).getName();
+                    order.add(nameRemoved);
+                    roundWeight = roundWeight + boxArrayList.get(i).getWeight();
+                    boxArrayList.remove(i);
+
+
+                        i=-1;
+
+                        for (Box aBoxArrayList : boxArrayList) {
+                            for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
+                                if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
+                                    aBoxArrayList.removeBox(k);   //remove deleted box from arraylists in boxes
+                                }
+                            }
+                        }
+
+                }
+            }
+        }
+        System.out.println("The boxes can be removed in this order: " + order);
+    }
+
+    /*public void sort2(int manpower) {
+        ArrayList<String> order = new ArrayList<>(boxArrayList.size());
         int time = 0;
         System.out.println("Manpower: " + manpower);
         while (boxArrayList.size() > 0) {
@@ -55,6 +97,7 @@ public class Sorting {
                 if (boxArrayList.get(i).isFree() && manpower >= roundWeight) {
                     //Remove box, it has nothing on it
                     String nameRemoved = boxArrayList.get(i).getName();
+                    order.add(nameRemoved);
                     roundWeight = roundWeight + boxArrayList.get(i).getWeight();
                     if(manpower >= roundWeight) {
                         boxArrayList.remove(i);
@@ -75,7 +118,8 @@ public class Sorting {
         }
         time++;
         System.out.println("Time:" + time);
-    }
+        System.out.println(order);
+    }*/
     public void sort3(){
         System.out.println("To be continued...");
     }

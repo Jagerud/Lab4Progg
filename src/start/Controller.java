@@ -15,7 +15,8 @@ public class Controller {
         System.out.println(iClass.getNrOfBoxes());
         createBox();    //Store input in box objets
         testBox();
-        chooser();  //Choose program then sort and remove boxes
+        //chooser();  //Choose program then sort and remove boxes
+        sorting.sort2(5);
         sorting.testBoxAfterSort();
     }
 
