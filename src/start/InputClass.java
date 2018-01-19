@@ -16,14 +16,14 @@ public class InputClass {
     private HashMap<String, Integer> boxMap = new HashMap<>();
     private HashMap<String, ArrayList<String>> maps = new HashMap<>();
     private ArrayList<String> boxNameList = new ArrayList<>();
-    private int line, nrOfBoxes;
+    private int nrOfBoxes;
     private String line2;
     private BufferedReader in;
 
     public InputClass() {
 
     }
-
+//testar lite vim yooooooo
     public boolean storeInput() {
         File fileObj;
         JFileChooser fileBrowser = new JFileChooser();
@@ -36,7 +36,7 @@ public class InputClass {
             }
             try {
                 BufferedReader in = new BufferedReader(new FileReader(fileObj));
-                line = Integer.parseInt(in.readLine());
+                int line = Integer.parseInt(in.readLine());
                 nrOfBoxes = line;
 
                 for (int i = 0; i < line; i++) {
