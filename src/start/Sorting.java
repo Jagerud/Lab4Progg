@@ -32,23 +32,51 @@ public class Sorting {
     public void sort2(int manpower) {
         order = new ArrayList<>(boxArrayList.size());
         int time = 0;
-        boolean flagTime =false;
+
         while (boxArrayList.size() > 0) {
+            boolean flagTime =false, breaker = false;
+            ArrayList<String> removedBoxes = new ArrayList<>();
             int roundWeight = 0, roundWeightOld = 0, roundWeightTotal = 0;
             for(int j = 0; j<2;j++) {
                 for (int i = 0; i < 2; i++) {
                     for (Box aBoxArrayList : boxArrayList) {
-                        if (aBoxArrayList.isFree() && manpower >= roundWeight) {
+                        for (Box aBoxInBoxList: aBoxArrayList.getHigherBox()) { //loop boxes above
+                            if(aBoxInBoxList.getHigherBox().isEmpty()){ //boxes with just one level of boxes on them
+                                for (String removed: removedBoxes
+                                     ) {
+                                    if(aBoxInBoxList.getName().compareToIgnoreCase(removed) == 0){  //if higher box is to be removed
+                                        aBoxArrayList.possibleTarget(true);
+                                    }else{  //If parent has not been removed neither can this one
+                                        aBoxArrayList.possibleTarget(false);
+                                        breaker = true;
+                                        break;  //TODO check that this breaks one for loop
+                                    }
+                                }
+                            if(!breaker){
+                                    break;  //stop checking other boxes if not possible target
+                            }
+                            }else{
+                                //TODO more than one level of boxes above, ignore
+                            }
+                        }
+                        //checked one box in lower layer, marked as possible or not
+
+                        if (aBoxArrayList.isPossibleTarget() && manpower >= roundWeight) {    //TODO add more in if to check possible
                             //Flag box, it has nothing on it
-                            if (roundWeight + aBoxArrayList.getWeight() <= manpower) {
+                            if (roundWeight + aBoxArrayList.getWeight() <= manpower) {  //TODO can probably merge if with the one above
 
                                 roundWeight = roundWeight + aBoxArrayList.getWeight();
-                                if (flagTime) {
+                                removedBoxes.add(aBoxArrayList.getName());
+                                if (flagTime) { //TODO unsure when to flag now
                                     aBoxArrayList.flag();
+
                                     //roundWeight = roundWeight + aBoxArrayList.getWeight();
                                 }
                             }
                         }
+                    }
+                    if(roundWeight == manpower){    //TODO can not get better, stop looping
+                        //Fill with correct boxes and flag
                     }
                     if (i == 0) {
                         roundWeightOld = roundWeight;
@@ -105,3 +133,19 @@ public class Sorting {
         }
     }
 }
+/*
+//Saving for eventual mistakes
+if (aBoxArrayList.isFree() && manpower >= roundWeight) {    //TODO add more in if to check possible
+                            //Flag box, it has nothing on it
+                            if (roundWeight + aBoxArrayList.getWeight() <= manpower) {
+
+                                roundWeight = roundWeight + aBoxArrayList.getWeight();
+                                removedBoxes.add(aBoxArrayList.getName());
+                                if (flagTime) { //TODO unsure when to flag now
+                                    aBoxArrayList.flag();
+
+                                    //roundWeight = roundWeight + aBoxArrayList.getWeight();
+                                }
+                            }
+                        }
+ */
