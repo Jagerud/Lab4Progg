@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Created by Jaeger on 2016-08-02.
  */
 public class Sorting {
+    private final String removed = "xxxxx";
     private ArrayList<Box> boxArrayList;
     private ArrayList<String> order;
-    private final String removed = "xxxxx";
 
     public Sorting(ArrayList<Box> boxArrayList) {
         this.boxArrayList = boxArrayList;
@@ -35,49 +35,39 @@ public class Sorting {
         int time = 0;
 
         while (boxArrayList.size() > 0) {
-            boolean flagTime =false, breaker = false;
+            boolean flagTime = false, breaker = false;
             ArrayList<String> removedBoxes = new ArrayList<>();
+            ArrayList<Integer> roundWeightList = new ArrayList<>();
             //ArrayList<String> possibleBoxesList = new ArrayList<>();
             int roundWeight = 0, roundWeightOld = 0, roundWeightTotal = 0;
-            for(int j = 0; j<2;j++) {
-                for (int i = 0; i < 2; i++) {
-                    for (Box aBoxArrayList : boxArrayList) {
-                        if(aBoxArrayList.getHigherBox().isEmpty()){ //if nothing above
-                            aBoxArrayList.possibleTarget(true);
-                        }else {
-                            for (Box aBoxInBoxList : aBoxArrayList.getHigherBox()) { //loop boxes above  //TODO empty on a,b what happens?
-                                if (aBoxInBoxList.getHigherBox().isEmpty()) { //boxes with just one level of boxes on them
-                                    for (String removed : removedBoxes) {
-                                        if (aBoxInBoxList.getName().compareToIgnoreCase(removed) == 0) {  //if higher box is to be removed
-                                            aBoxArrayList.possibleTarget(true);
-                                        } else {  //If parent has not been removed neither can this one
-                                            aBoxArrayList.possibleTarget(false);
-                                            breaker = true;
-                                            break;  //TODO check that this breaks one for loop
-                                        }
-                                    }
-                                    if (!breaker) {
-                                        break;  //stop checking other boxes if not possible target
-                                    }
-                                } else {
-                                    //TODO more than one level of boxes above, ignore
+            //for(int j = 0; j<2;j++) {
+            //  for (int i = 0; i < 2; i++) {
+            for (Box aBoxArrayList : boxArrayList) {
+                if (aBoxArrayList.getHigherBox().isEmpty()) { //if nothing above
+                    aBoxArrayList.possibleTarget(true);
+                } else {
+                    for (Box aBoxInBoxList : aBoxArrayList.getHigherBox()) { //loop boxes above  //TODO empty on a,b what happens?
+                        if (aBoxInBoxList.getHigherBox().isEmpty()) { //boxes with just one level of boxes on them
+                            for (String removed : removedBoxes) {
+                                if (aBoxInBoxList.getName().compareToIgnoreCase(removed) == 0) {  //if higher box is to be removed
+                                    aBoxArrayList.possibleTarget(true);
+                                } else {  //If parent has not been removed neither can this one
+                                    aBoxArrayList.possibleTarget(false);
+                                    breaker = true;
+                                    break;  //TODO check that this breaks one for loop
                                 }
                             }
-                            //checked one box in lower layer, marked as possible or not
+                            if (!breaker) {
+                                break;  //stop checking other boxes if not possible target
+                            }
+                        } else {
+                            //TODO more than one level of boxes above, ignore
                         }
-                        //TODO loop through possibleBoxes and flag as close to manpower as possible (not over)
-                        if (aBoxArrayList.isPossibleTarget() && manpower >= roundWeight) {    //TODO add more in if to check possible
-                            //Flag box, it has nothing on it
-                            for (Box possibleBoxList: boxArrayList) {
-                                if(possibleBoxList.isPossibleTarget()){
-                                    if (roundWeight + aBoxArrayList.getWeight() <= manpower) {
-                                        roundWeight = roundWeight + aBoxArrayList.getWeight();
-                                        if(roundWeight==manpower){
-                                            possibleBoxList.flag();
-                                        }
-                                    }
-                                }
-                            }
+                    }
+                    //checked one box in lower layer, marked as possible or not
+                }
+
+                            /*
                             if (roundWeight + aBoxArrayList.getWeight() <= manpower) {  //TODO can probably merge if with the one above
 
                                 roundWeight = roundWeight + aBoxArrayList.getWeight();
@@ -90,33 +80,52 @@ public class Sorting {
                                     //roundWeight = roundWeight + aBoxArrayList.getWeight();
                                 }
                             }
+                        }*/
+            }
+            //TODO loop through possibleBoxes and flag as close to manpower as possible (not over)
+            //if (aBoxArrayList.isPossibleTarget() && manpower >= roundWeight) {    //TODO add more in if to check possible
+            //Flag box, it has nothing on it
+            for (Box possibleBoxList : boxArrayList) {   //Loop all boxes to get all possible targets
+                if (possibleBoxList.isPossibleTarget()) {
+                    if (roundWeight + possibleBoxList.getWeight() <= manpower) {
+                        roundWeight = roundWeight + possibleBoxList.getWeight();
+                        //roundWeightOld = roundWeight;
+                        roundWeightList.add(roundWeight);
+                        if (roundWeight == manpower) {
+                            possibleBoxList.flag();
+                            break;
+                        }else{
+
                         }
                     }
-
-                    if (i == 0) {
+                }
+            }
+            //}
+                    /*if (i == 0) {
                         roundWeightOld = roundWeight;
                     }
                 }
                 if(j == 0) {
                     roundWeightTotal = roundWeight + roundWeightOld;
                 }
-            }
-            if(roundWeightTotal < roundWeight + roundWeightOld) {
+            } */
+            if (roundWeightTotal < roundWeight + roundWeightOld) {
                 removeFlagged();
-            }else{
+            } else {
                 //rollback and remove first try
             }
         }
         print();
     }
-    private void removeFlagged(){
+
+    private void removeFlagged() {
         order.add("["); //to easier see which boxes are taken at the same time
         for (int i = 0; i < boxArrayList.size(); i++) {
             if (boxArrayList.get(i).isFlagged()) {
                 String nameRemoved = boxArrayList.get(i).getName();
                 order.add(nameRemoved);
                 boxArrayList.remove(i);
-                i=-1;
+                i = -1;
                 for (Box aBoxArrayList : boxArrayList) {
                     for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
                         if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
@@ -128,11 +137,12 @@ public class Sorting {
         }
         order.add("]");
     }
-    private void print(){
+
+    private void print() {
         System.out.println("The boxes can be removed in this order: " + order);
     }
 
-    public void sort3(){
+    public void sort3() {
         System.out.println("To be continued...");
     }
 
