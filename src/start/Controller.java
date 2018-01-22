@@ -10,6 +10,7 @@ public class Controller {
     private Sorting sorting = new Sorting(boxArrayList);
 
     public boolean start() {
+
         if(!iClass.storeInput()){
             return false;
         }
@@ -17,12 +18,13 @@ public class Controller {
         //iClass.showBoxInfo();
         //System.out.println(iClass.getNrOfBoxes());
         createBox();    //Store input in box objets
-        //testBox();
+        addLowerBoxes();
+        testBox();/*
         if (!chooser()) {  //Choose program then sort and remove boxes
             return false;
         }
         //sorting.sort2(5);
-        //sorting.testBoxAfterSort();
+        //sorting.testBoxAfterSort();*/
         return true;
     }
 
@@ -46,6 +48,14 @@ public class Controller {
                 }
             }
         }
+
+    }
+    private void addLowerBoxes(){
+        for (int i = boxArrayList.size() -1; i >= 0; i--) {
+            for (Box higherBoxes: boxArrayList.get(i).getHigherBox()) {
+                higherBoxes.addLowerBox(boxArrayList.get(i));
+            }
+        }
     }
 
     private void testBox() {
@@ -54,6 +64,12 @@ public class Controller {
             for (int j = 0; j < aBoxArrayList.getHigherBox().size(); j++) {
                 System.out.println(aBoxArrayList.getHigherBox().get(j).getName());
             }
+            //for (Box allUnder: boxArrayList) {
+                System.out.println("Box: " + aBoxArrayList.getName());
+                for (Box allUnder: aBoxArrayList.getLowerBox()) {
+                    System.out.println(allUnder.getName());
+                }
+            //}
         }
     }
 

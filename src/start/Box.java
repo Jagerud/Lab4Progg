@@ -11,6 +11,7 @@ public class Box {
     private int weight;
     private boolean flagged, possibleTarget;
     private ArrayList<Box> higherBox = new ArrayList<>();
+    private ArrayList<Box> lowerBox = new ArrayList<>();
 
     public Box(String name, int weight) {
         this.name = name;
@@ -55,5 +56,13 @@ public class Box {
 
     public ArrayList<Box> getHigherBox() {
         return higherBox;
+    }
+
+    public ArrayList<Box> getLowerBox() {
+        return lowerBox;
+    }
+
+    public void addLowerBox(Box lowerBox) {
+        this.lowerBox.add(lowerBox);
     }
 }
