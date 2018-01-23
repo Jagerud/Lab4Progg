@@ -1,14 +1,17 @@
 package start;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by Jaeger on 2016-08-02.
  */
 public class Sorting {
+    private final String removed = "xxxxx";
     private ArrayList<Box> boxArrayList;
     private ArrayList<String> order;
-    private final String removed = "xxxxx";
+    private int time = 0;
 
     public Sorting(ArrayList<Box> boxArrayList) {
         this.boxArrayList = boxArrayList;
@@ -31,49 +34,48 @@ public class Sorting {
 
     public void sort2(int manpower) {
         order = new ArrayList<>(boxArrayList.size());
-        int time = 0;
-        boolean flagTime =false;
         while (boxArrayList.size() > 0) {
-            int roundWeight = 0, roundWeightOld = 0, roundWeightTotal = 0;
-            for(int j = 0; j<2;j++) {
-                for (int i = 0; i < 2; i++) {
-                    for (Box aBoxArrayList : boxArrayList) {
-                        if (aBoxArrayList.isFree() && manpower >= roundWeight) {
-                            //Flag box, it has nothing on it
-                            if (roundWeight + aBoxArrayList.getWeight() <= manpower) {
+            ArrayList<Box> possibleBoxesList = new ArrayList<>();
+            int roundWeight = 0;
+            for (Box aBoxArrayList : boxArrayList) {
+                if (aBoxArrayList.getHigherBox().isEmpty()) { //if nothing above
+                    aBoxArrayList.possibleTarget(true);
+                    possibleBoxesList.add(aBoxArrayList);
+                } else {  //If testing under before removing, not done
 
-                                roundWeight = roundWeight + aBoxArrayList.getWeight();
-                                if (flagTime) {
-                                    aBoxArrayList.flag();
-                                    //roundWeight = roundWeight + aBoxArrayList.getWeight();
-                                }
-                            }
-                        }
-                    }
-                    if (i == 0) {
-                        roundWeightOld = roundWeight;
-                    }
-                }
-                if(j == 0) {
-                    roundWeightTotal = roundWeight + roundWeightOld;
                 }
             }
-            if(roundWeightTotal < roundWeight + roundWeightOld) {
-                removeFlagged();
-            }else{
-                //rollback and remove first try
+
+            for (int i = 0; i < possibleBoxesList.size(); i++) {
+                for (int j = 1; j < (possibleBoxesList.size() - i); j++) {
+                    if (possibleBoxesList.get(j - 1).getLowerBox().size() < possibleBoxesList.get(j).getLowerBox().size()) {
+                        Collections.rotate(possibleBoxesList.subList(j - 1, j + 1), -1);
+                    }
+                }
             }
+
+            roundWeight = 0;
+            for (int i = 0; i < possibleBoxesList.size(); i++) {
+                if (roundWeight + possibleBoxesList.get(i).getWeight() <= manpower) {
+                    roundWeight = roundWeight + possibleBoxesList.get(i).getWeight();
+                    possibleBoxesList.get(i).flag();
+                    possibleBoxesList.remove(possibleBoxesList.get(i));
+                    i--;
+                }
+            }
+            removeFlagged();
         }
         print();
     }
-    private void removeFlagged(){
+
+    private void removeFlagged() {
         order.add("["); //to easier see which boxes are taken at the same time
         for (int i = 0; i < boxArrayList.size(); i++) {
             if (boxArrayList.get(i).isFlagged()) {
                 String nameRemoved = boxArrayList.get(i).getName();
                 order.add(nameRemoved);
                 boxArrayList.remove(i);
-                i=-1;
+                i = -1;
                 for (Box aBoxArrayList : boxArrayList) {
                     for (int k = 0; k < aBoxArrayList.getHigherBox().size(); k++) {
                         if (aBoxArrayList.getHigherBox().get(k).getName().equalsIgnoreCase(nameRemoved)) {
@@ -83,13 +85,18 @@ public class Sorting {
                 }
             }
         }
+        time++;
         order.add("]");
     }
-    private void print(){
+
+    private void print() {
         System.out.println("The boxes can be removed in this order: " + order);
+        if (time != 0) {
+            System.out.println("Total time: " + time);
+        }
     }
 
-    public void sort3(){
+    public void sort3() {
         System.out.println("To be continued...");
     }
 
@@ -105,3 +112,19 @@ public class Sorting {
         }
     }
 }
+/*
+//Saving for eventual mistakes
+if (aBoxArrayList.isFree() && manpower >= roundWeight) {    //TODO add more in if to check possible
+                            //Flag box, it has nothing on it
+                            if (roundWeight + aBoxArrayList.getWeight() <= manpower) {
+
+                                roundWeight = roundWeight + aBoxArrayList.getWeight();
+                                removedBoxes.add(aBoxArrayList.getName());
+                                if (flagTime) { //TODO unsure when to flag now
+                                    aBoxArrayList.flag();
+
+                                    //roundWeight = roundWeight + aBoxArrayList.getWeight();
+                                }
+                            }
+                        }
+ */
