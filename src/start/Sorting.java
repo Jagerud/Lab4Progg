@@ -32,8 +32,9 @@ public class Sorting {
         print();
     }
 
-    public void sort2(int manpower) {
+    public int sort2(int manpower) {
         order = new ArrayList<>(boxArrayList.size());
+        int maxRoundWeight=0;
         while (boxArrayList.size() > 0) {
             ArrayList<Box> possibleBoxesList = new ArrayList<>();
             for (Box aBoxArrayList : boxArrayList) {
@@ -44,12 +45,16 @@ public class Sorting {
 
                 }
             }
-            flagBoxes(sortByLowerBoxes(possibleBoxesList), manpower);
+            int roundWeight = flagBoxes(sortByLowerBoxes(possibleBoxesList), manpower);
+            if(roundWeight > maxRoundWeight){
+                maxRoundWeight = roundWeight;
+            }
             removeFlagged();
         }
         print();
+        return maxRoundWeight;
     }
-    private void flagBoxes(ArrayList<Box> possibleBoxesList, int manpower){
+    private int flagBoxes(ArrayList<Box> possibleBoxesList, int manpower){
         int roundWeight = 0;
         for (int i = 0; i < possibleBoxesList.size(); i++) {
             if (roundWeight + possibleBoxesList.get(i).getWeight() <= manpower) {
@@ -59,6 +64,7 @@ public class Sorting {
                 i--;
             }
         }
+        return roundWeight;
     }
     private ArrayList<Box> sortByLowerBoxes(ArrayList<Box> possibleBoxesList){
         for (int i = 0; i < possibleBoxesList.size(); i++) {
