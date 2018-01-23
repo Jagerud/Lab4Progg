@@ -110,7 +110,7 @@ public class Sorting {
                 System.out.println(printIt.getName());
             }
 
-            while (!possibleBoxesList.isEmpty()) {
+
                 roundWeight = 0;
                 for (int i = 0; i < possibleBoxesList.size(); i++) {
                     //Box sortedPossibleBoxes = possibleBoxesList.get(i);
@@ -132,8 +132,7 @@ public class Sorting {
                     }
                 }
                 removeFlagged();
-            }
-
+            
                 //}
 
             //}
