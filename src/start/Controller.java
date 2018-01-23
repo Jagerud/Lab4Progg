@@ -19,11 +19,11 @@ public class Controller {
         //System.out.println(iClass.getNrOfBoxes());
         createBox();    //Store input in box objets
         addLowerBoxes();
-        testBox();/*
-        if (!chooser()) {  //Choose program then sort and remove boxes
-            return false;
-        }
-        //sorting.sort2(5);
+        //testBox();
+        //if (!chooser()) {  //Choose program then sort and remove boxes
+        //    return false;
+        //}
+        sorting.sort2(5);
         //sorting.testBoxAfterSort();*/
         return true;
     }
