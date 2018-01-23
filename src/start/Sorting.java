@@ -36,7 +36,6 @@ public class Sorting {
         order = new ArrayList<>(boxArrayList.size());
         while (boxArrayList.size() > 0) {
             ArrayList<Box> possibleBoxesList = new ArrayList<>();
-            int roundWeight = 0;
             for (Box aBoxArrayList : boxArrayList) {
                 if (aBoxArrayList.getHigherBox().isEmpty()) { //if nothing above
                     aBoxArrayList.possibleTarget(true);
@@ -45,27 +44,31 @@ public class Sorting {
 
                 }
             }
-
-            for (int i = 0; i < possibleBoxesList.size(); i++) {
-                for (int j = 1; j < (possibleBoxesList.size() - i); j++) {
-                    if (possibleBoxesList.get(j - 1).getLowerBox().size() < possibleBoxesList.get(j).getLowerBox().size()) {
-                        Collections.rotate(possibleBoxesList.subList(j - 1, j + 1), -1);
-                    }
-                }
-            }
-
-            roundWeight = 0;
-            for (int i = 0; i < possibleBoxesList.size(); i++) {
-                if (roundWeight + possibleBoxesList.get(i).getWeight() <= manpower) {
-                    roundWeight = roundWeight + possibleBoxesList.get(i).getWeight();
-                    possibleBoxesList.get(i).flag();
-                    possibleBoxesList.remove(possibleBoxesList.get(i));
-                    i--;
-                }
-            }
+            flagBoxes(sortByLowerBoxes(possibleBoxesList), manpower);
             removeFlagged();
         }
         print();
+    }
+    private void flagBoxes(ArrayList<Box> possibleBoxesList, int manpower){
+        int roundWeight = 0;
+        for (int i = 0; i < possibleBoxesList.size(); i++) {
+            if (roundWeight + possibleBoxesList.get(i).getWeight() <= manpower) {
+                roundWeight = roundWeight + possibleBoxesList.get(i).getWeight();
+                possibleBoxesList.get(i).flag();
+                possibleBoxesList.remove(possibleBoxesList.get(i));
+                i--;
+            }
+        }
+    }
+    private ArrayList<Box> sortByLowerBoxes(ArrayList<Box> possibleBoxesList){
+        for (int i = 0; i < possibleBoxesList.size(); i++) {
+            for (int j = 1; j < (possibleBoxesList.size() - i); j++) {
+                if (possibleBoxesList.get(j - 1).getLowerBox().size() < possibleBoxesList.get(j).getLowerBox().size()) {
+                    Collections.rotate(possibleBoxesList.subList(j - 1, j + 1), -1);
+                }
+            }
+        }
+        return possibleBoxesList;
     }
 
     private void removeFlagged() {
