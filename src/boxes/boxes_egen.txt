@@ -1,0 +1,57 @@
+13
+
+a 2
+
+b 3
+
+c 2
+
+d 7
+
+e 9
+
+f 1
+
+g 2
+
+h 7
+
+i 4
+
+j 5
+
+k 2
+
+l 1
+
+m 7
+
+13
+
+a b
+
+a c
+
+b k
+
+c d
+
+d e
+
+d f
+
+d g
+
+e h
+
+f h
+
+g i
+
+g j
+
+k l
+
+k m
+
+
