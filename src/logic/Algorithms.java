@@ -19,6 +19,9 @@ public class Algorithms {
         this.boxArrayList = boxArrayList;
     }
 
+    /**
+     * This method will calculate the solution to the first problem.
+     */
     public void sort1() {
         order = new ArrayList<>(boxArrayList.size());
         while (boxArrayList.size() > 0) {
@@ -33,6 +36,11 @@ public class Algorithms {
         }
     }
 
+    /**
+     * This method will calculate the solution to the second problem.
+     * @param manpower, how many workers there are.
+     * @return will return the heaviest round while removing boxes.
+     */
     public int sort2(int manpower) {
         time = 0;
         order = new ArrayList<>(boxArrayList.size());
@@ -56,6 +64,12 @@ public class Algorithms {
         return maxRoundWeight;
     }
 
+    /**
+     *
+     * @param possibleBoxesList
+     * @param manpower
+     * @return
+     */
     private int flagBoxes(ArrayList<Box> possibleBoxesList, int manpower){
         int roundWeight = 0;
         for (int i = 0; i < possibleBoxesList.size(); i++) {
@@ -69,6 +83,11 @@ public class Algorithms {
         return roundWeight;
     }
 
+    /**
+     *
+     * @param possibleBoxesList
+     * @return
+     */
     private ArrayList<Box> sortByLowerBoxes(ArrayList<Box> possibleBoxesList){
         for (int i = 0; i < possibleBoxesList.size(); i++) {
             for (int j = 1; j < (possibleBoxesList.size() - i); j++) {
@@ -80,6 +99,9 @@ public class Algorithms {
         return possibleBoxesList;
     }
 
+    /**
+     *
+     */
     private void removeFlagged() {
         order.add("["); //to easier see which boxes are taken at the same time
         for (int i = 0; i < boxArrayList.size(); i++) {
@@ -101,6 +123,9 @@ public class Algorithms {
         order.add("]");
     }
 
+    /**
+     * This method prints out the order in which to remove the boxes.
+     */
     public void print() {
         System.out.println("The boxes can be removed in this order: " + order);
         if (time != 0) {
@@ -109,6 +134,9 @@ public class Algorithms {
     }
 
 
+    /**
+     * A test method to print out the remaining boxes.
+     */
     public void testBoxAfterSort() {
         for (Box aBoxArrayList : boxArrayList) {
             System.out.println(aBoxArrayList.getName() + " " + aBoxArrayList.getWeight());
@@ -121,6 +149,11 @@ public class Algorithms {
         }
     }
 
+    /**
+     * This method returns the heaviest box in the file.
+     * @param boxes, the boxes to be sorted.
+     * @return the heaviest box.
+     */
     public int heaviestBox(ArrayList<Box> boxes) {
         int heaviest = 0;
         for (Box box : boxes) {

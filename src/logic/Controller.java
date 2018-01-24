@@ -12,6 +12,10 @@ public class Controller {
     private ArrayList<data.Box> boxArrayList = new ArrayList<>();
     private logic.Algorithms Algorithms = new Algorithms(boxArrayList);
 
+    /**
+     *
+     * @return
+     */
     public boolean start() {
 
         if (!iClass.chooseFile()) {
@@ -28,6 +32,9 @@ public class Controller {
         return true;
     }
 
+    /**
+     * This method creates the boxes.
+     */
     private void createBox() {
         HashMap<String, Integer> boxNameWeight = iClass.getBoxNameWeightMap();
         HashMap<String, ArrayList<String>> boxOnTopMap = iClass.getBoxOnTopMap();
@@ -52,6 +59,9 @@ public class Controller {
 
     }
 
+    /**
+     *
+     */
     private void addLowerBoxes() {
         for (int i = boxArrayList.size() - 1; i >= 0; i--) {
             for (data.Box higherBoxes : boxArrayList.get(i).getHigherBox()) {
@@ -60,6 +70,9 @@ public class Controller {
         }
     }
 
+    /**
+     * This method is to test functionality.
+     */
     private void testBox() {
         for (data.Box aBoxArrayList : boxArrayList) {
             System.out.println(aBoxArrayList.getName() + " " + aBoxArrayList.getWeight());
@@ -75,6 +88,10 @@ public class Controller {
         }
     }
 
+    /**
+     * This method checks which problem the user wants to solve.
+     * @return a boolean that is if the user wants to continue.
+     */
     private boolean chooser() {
         Object stringArray[] = {"First", "Second", "Third"};
 
@@ -107,6 +124,9 @@ public class Controller {
         return true;
     }
 
+    /**
+     * This method will calculate the solution to the third problem.
+     */
     public void sort3() {
 
         int heaviestBox = Algorithms.heaviestBox(boxArrayList);

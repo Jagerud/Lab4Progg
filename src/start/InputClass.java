@@ -25,6 +25,10 @@ public class InputClass {
 
     }
 
+    /**
+     * This method lets the user upload a file.
+     * @return a boolean that is if the user wants to continue.
+     */
     public boolean chooseFile() {
         JFileChooser fileBrowser = new JFileChooser();
         int result = fileBrowser.showOpenDialog(fileBrowser);
@@ -42,6 +46,9 @@ public class InputClass {
         }
     }
 
+    /**
+     * This method stores the file in the program.
+     */
     public void storeFile() {
 
         try {
@@ -92,6 +99,9 @@ public class InputClass {
 
     }
 
+    /**
+     *
+     */
     public void showBoxInfo() { //oklart om det behövs 2 iteratorer, fundera nån gång
         for (Object o : boxMap.entrySet()) {
             Map.Entry pair = (Map.Entry) o;
@@ -103,18 +113,34 @@ public class InputClass {
         }
     }
 
+    /**
+     * This method returns a list of names of the boxes.
+     * @return a list of names.
+     */
     public ArrayList<String> getBoxNameList() {
         return boxNameList;
     }
 
+    /**
+     * This method returns the weights for all the boxes.
+     * @return a list of weights.
+     */
     public HashMap<String, Integer> getBoxNameWeightMap() {
         return boxMap;
     }
 
+    /**
+     * This method returns which box is on top of which.
+     * @return a map of the boxes locations.
+     */
     public HashMap<String, ArrayList<String>> getBoxOnTopMap() {
         return maps;
     }
 
+    /**
+     * This method returns the amount of boxes in the current file.
+     * @return the amount of boxes.
+     */
     public int getNrOfBoxes() {
         return nrOfBoxes;
     }
