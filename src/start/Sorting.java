@@ -32,8 +32,9 @@ public class Sorting {
     }
 
     public int sort2(int manpower) {
+        time = 0;
         order = new ArrayList<>(boxArrayList.size());
-        int maxRoundWeight=0;
+        int maxRoundWeight = 0;
         while (boxArrayList.size() > 0) {
             ArrayList<Box> possibleBoxesList = new ArrayList<>();
             for (Box aBoxArrayList : boxArrayList) {
@@ -100,13 +101,38 @@ public class Sorting {
     public void print() {
         System.out.println("The boxes can be removed in this order: " + order);
         if (time != 0) {
-            System.out.println("Total time: " + time);
+            System.out.println("Total time: " + time * 15);
         }
     }
 
-    public void sort3() {
+    /*public void sort3() {
+
         System.out.println("To be continued...");
-    }
+
+        int a = boxArrayList.size();
+        int b = heaviestBox(boxArrayList);
+        int c = sort2(999);
+        int d;
+
+        int k = (int) (100 * c * Math.ceil((a * 15) / 60.0));
+
+        System.out.println(k);
+
+        for (int i = b; i <= c; i++) {
+
+
+
+            System.out.println("te1");
+            d = sort2(i);
+            int kl = (int) (100 * i * Math.ceil((d * 15) / 60.0));
+
+            if (kl >= k) {
+                System.out.println("te2");
+                k = kl;
+                c = i;
+            }
+        }
+    }*/
 
     public void testBoxAfterSort() {
         for (Box aBoxArrayList : boxArrayList) {
@@ -118,6 +144,21 @@ public class Sorting {
         if (boxArrayList.isEmpty()) {
             System.out.println("Empty");
         }
+    }
+
+    public int heaviestBox(ArrayList<Box> boxes) {
+        int heaviest = 0;
+        for (Box box : boxes) {
+            int temp = box.getWeight();
+            if (temp > heaviest) {
+                heaviest = temp;
+            }
+        }
+        return heaviest;
+    }
+
+    public int getTime() {
+        return time;
     }
 }
 /*

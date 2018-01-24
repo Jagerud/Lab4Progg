@@ -11,7 +11,7 @@ public class Controller {
 
     public boolean start() {
 
-        if(!iClass.storeInput()){
+        if(!iClass.chooseFile()){
             return false;
         }
         //Get input from file
@@ -23,8 +23,8 @@ public class Controller {
         //if (!chooser()) {  //Choose program then sort and remove boxes
         //    return false;
         //}
-        sorting.sort2(5);   //TODO tas bort sen
-        sorting.print();        //TODO tas bort sen
+        //sorting.sort2(5);
+        sort3();
         //sorting.testBoxAfterSort();*/
         return true;
     }
@@ -97,9 +97,41 @@ public class Controller {
                 sorting.print();
                 break;
             case 2:
-                sorting.sort3();
+                sort3();
                 break;
         }
         return true;
+    }
+    public void sort3() {
+
+        int a = boxArrayList.size();
+        int b = sorting.heaviestBox(boxArrayList);
+
+        int c = sorting.sort2(999);
+        int d = 0, e = 0;
+
+        for (int i = b; i <= c; i++) {
+
+            createBox();
+            addLowerBoxes();
+
+            sorting.sort2(i);
+            int kl = (int) (100 * i * Math.ceil((sorting.getTime() * 15) / 60.0));
+
+            if (d == 0) {
+                d = kl;
+            }
+
+            if (kl <= d) {
+                d = kl;
+                e = i;
+            }
+        }
+        System.out.println("Det mest effektiva sättet att flytta lådorna är med " + e + " arbetare. Kostnaden blir: " + d);
+        createBox();
+        addLowerBoxes();
+
+        sorting.sort2(e);
+        sorting.print();
     }
 }
