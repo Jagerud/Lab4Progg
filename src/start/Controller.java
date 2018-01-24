@@ -98,40 +98,38 @@ public class Controller {
                 break;
             case 2:
                 sort3();
+                sorting.print();
                 break;
         }
         return true;
     }
     public void sort3() {
 
-        int a = boxArrayList.size();
-        int b = sorting.heaviestBox(boxArrayList);
+        int heaviestBox = sorting.heaviestBox(boxArrayList);
+        int heaviestRound = sorting.sort2(999);
+        int cheapestPrice = 0, leastWorkers = 0;
 
-        int c = sorting.sort2(999);
-        int d = 0, e = 0;
-
-        for (int i = b; i <= c; i++) {
+        for (int i = heaviestBox; i <= heaviestRound; i++) {
 
             createBox();
             addLowerBoxes();
 
             sorting.sort2(i);
-            int kl = (int) (100 * i * Math.ceil((sorting.getTime() * 15) / 60.0));
+            int currentPrice = (int) (100 * i * Math.ceil((sorting.getTime() * 15) / 60.0));
 
-            if (d == 0) {
-                d = kl;
+            if (cheapestPrice == 0) {
+                cheapestPrice = currentPrice;
             }
 
-            if (kl <= d) {
-                d = kl;
-                e = i;
+            if (currentPrice <= cheapestPrice) {
+                cheapestPrice = currentPrice;
+                leastWorkers = i;
             }
         }
-        System.out.println("Det mest effektiva sättet att flytta lådorna är med " + e + " arbetare. Kostnaden blir: " + d);
+        System.out.println("The most effective way to move the boxes is with " + leastWorkers + " workers. The cost will be: " + cheapestPrice);
         createBox();
         addLowerBoxes();
 
-        sorting.sort2(e);
-        sorting.print();
+        sorting.sort2(leastWorkers);
     }
 }
