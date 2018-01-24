@@ -18,12 +18,13 @@ public class Controller {
         //iClass.showBoxInfo();
         //System.out.println(iClass.getNrOfBoxes());
         createBox();    //Store input in box objets
-        addLowerBoxes();
+        //addLowerBoxes();
         //testBox();
         //if (!chooser()) {  //Choose program then sort and remove boxes
         //    return false;
         //}
-        sorting.sort2(5);
+        sorting.sort2(5);   //TODO tas bort sen
+        sorting.print();        //TODO tas bort sen
         //sorting.testBoxAfterSort();*/
         return true;
     }
@@ -48,6 +49,7 @@ public class Controller {
                 }
             }
         }
+        addLowerBoxes();
 
     }
     private void addLowerBoxes(){
@@ -83,6 +85,7 @@ public class Controller {
                 return false;
             case 0:
                 sorting.sort1();
+                sorting.print();
                 break;
             case 1:
                 String workers = JOptionPane.showInputDialog(
@@ -91,6 +94,7 @@ public class Controller {
                     return false;
                 }
                 sorting.sort2(Integer.parseInt(workers));
+                sorting.print();
                 break;
             case 2:
                 sorting.sort3();

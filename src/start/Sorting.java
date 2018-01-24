@@ -29,7 +29,6 @@ public class Sorting {
             }
             removeFlagged();
         }
-        print();
     }
 
     public int sort2(int manpower) {
@@ -51,7 +50,7 @@ public class Sorting {
             }
             removeFlagged();
         }
-        print();
+        //print();
         return maxRoundWeight;
     }
     private int flagBoxes(ArrayList<Box> possibleBoxesList, int manpower){
@@ -98,7 +97,7 @@ public class Sorting {
         order.add("]");
     }
 
-    private void print() {
+    public void print() {
         System.out.println("The boxes can be removed in this order: " + order);
         if (time != 0) {
             System.out.println("Total time: " + time);
