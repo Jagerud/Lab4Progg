@@ -1,9 +1,12 @@
 package start;
 
 
+import logic.Controller;
+
 /**
  * Created by Sand on 2016-04-04.
  */
+
 public class Lab4 {
     public static void main(String args[]) {
         while (true) {

@@ -1,4 +1,4 @@
-package start;
+package data;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by Jaeger on 2016-08-10.
  * Edited by Alvestig.
  */
+
 public class Box {
     private String name;
     private int weight;

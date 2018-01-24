@@ -12,22 +12,20 @@ import java.util.Map;
 /**
  * Created by Jaeger on 2016-07-29.
  */
+
 public class InputClass {
     private HashMap<String, Integer> boxMap = new HashMap<>();
     private HashMap<String, ArrayList<String>> maps = new HashMap<>();
     private ArrayList<String> boxNameList = new ArrayList<>();
     private int nrOfBoxes;
     private String line2;
-    private BufferedReader in;
     private File fileObj;
 
     public InputClass() {
 
     }
 
-    //testar lite vim yooooooo
     public boolean chooseFile() {
-        //File fileObj;
         JFileChooser fileBrowser = new JFileChooser();
         int result = fileBrowser.showOpenDialog(fileBrowser);
 
@@ -69,10 +67,9 @@ public class InputClass {
                 line2 = in.readLine();
             }
             line = Integer.parseInt(in.readLine());
-            String lineStringSaved;// = "bull";// =
-            String lineString = "";
+            String lineString;
             String lineString2;
-            ArrayList<String> tempList = new ArrayList<>();
+            ArrayList<String> tempList;
 
             for (int i = 0; i < line; i++) {
                 line2 = in.readLine();
