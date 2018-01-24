@@ -11,20 +11,16 @@ public class Controller {
 
     public boolean start() {
 
-        if(!iClass.chooseFile()){
+        if (!iClass.chooseFile()) {
             return false;
         }
         //Get input from file
         //iClass.showBoxInfo();
-        //System.out.println(iClass.getNrOfBoxes());
         createBox();    //Store input in box objets
-        //addLowerBoxes();
         //testBox();
-        //if (!chooser()) {  //Choose program then sort and remove boxes
-        //    return false;
-        //}
-        //sorting.sort2(5);
-        sort3();
+        if (!chooser()) {  //Choose program then sort and remove boxes
+            return false;
+        }
         //sorting.testBoxAfterSort();*/
         return true;
     }
@@ -52,9 +48,10 @@ public class Controller {
         addLowerBoxes();
 
     }
-    private void addLowerBoxes(){
-        for (int i = boxArrayList.size() -1; i >= 0; i--) {
-            for (Box higherBoxes: boxArrayList.get(i).getHigherBox()) {
+
+    private void addLowerBoxes() {
+        for (int i = boxArrayList.size() - 1; i >= 0; i--) {
+            for (Box higherBoxes : boxArrayList.get(i).getHigherBox()) {
                 higherBoxes.addLowerBox(boxArrayList.get(i));
             }
         }
@@ -67,10 +64,10 @@ public class Controller {
                 System.out.println(aBoxArrayList.getHigherBox().get(j).getName());
             }
             //for (Box allUnder: boxArrayList) {
-                System.out.println("Box: " + aBoxArrayList.getName());
-                for (Box allUnder: aBoxArrayList.getLowerBox()) {
-                    System.out.println(allUnder.getName());
-                }
+            System.out.println("Box: " + aBoxArrayList.getName());
+            for (Box allUnder : aBoxArrayList.getLowerBox()) {
+                System.out.println(allUnder.getName());
+            }
             //}
         }
     }
@@ -88,11 +85,14 @@ public class Controller {
                 sorting.print();
                 break;
             case 1:
-                String workers = JOptionPane.showInputDialog(
-                        null, "Insert number of workers:", "Workers", JOptionPane.QUESTION_MESSAGE);
-                if (workers == null) {
-                    return false;
-                }
+                String workers;
+                do {
+                    workers = JOptionPane.showInputDialog(
+                            null, "Insert number of workers:", "Workers", JOptionPane.QUESTION_MESSAGE);
+                    if (workers == null) {
+                        return false;
+                    }
+                } while (Integer.parseInt(workers) < sorting.heaviestBox(boxArrayList));
                 sorting.sort2(Integer.parseInt(workers));
                 sorting.print();
                 break;
@@ -103,6 +103,7 @@ public class Controller {
         }
         return true;
     }
+
     public void sort3() {
 
         int heaviestBox = sorting.heaviestBox(boxArrayList);
