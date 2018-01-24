@@ -100,7 +100,8 @@ public class InputClass {
     }
 
     /**
-     *
+     * This method prints the info from hashmaps filled in
+     * InputClass.storeFile()
      */
     public void showBoxInfo() { //oklart om det behövs 2 iteratorer, fundera nån gång
         for (Object o : boxMap.entrySet()) {

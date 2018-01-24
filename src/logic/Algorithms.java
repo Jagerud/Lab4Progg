@@ -65,7 +65,8 @@ public class Algorithms {
     }
 
     /**
-     *
+     * This method flags boxes that are to be removed. It also checks
+     * how many boxes that can be removed depending on the parameter manpower.
      * @param possibleBoxesList
      * @param manpower
      * @return
@@ -84,9 +85,9 @@ public class Algorithms {
     }
 
     /**
-     *
+     * This method sorts the array by number of boxes under the chosen box.
      * @param possibleBoxesList
-     * @return
+     * @return, returns the array sorted.
      */
     private ArrayList<Box> sortByLowerBoxes(ArrayList<Box> possibleBoxesList){
         for (int i = 0; i < possibleBoxesList.size(); i++) {
@@ -100,7 +101,8 @@ public class Algorithms {
     }
 
     /**
-     *
+     *  This method removes boxes that are flagged. It also removes
+     *  them as "higher" boxes in boxes under them.
      */
     private void removeFlagged() {
         order.add("["); //to easier see which boxes are taken at the same time
@@ -124,7 +126,7 @@ public class Algorithms {
     }
 
     /**
-     * This method prints out the order in which to remove the boxes.
+     * This method prints out the order in which to remove the boxes and the total time.
      */
     public void print() {
         System.out.println("The boxes can be removed in this order: " + order);
